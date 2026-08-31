@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_web_client/flutter_deck_web_client.dart';
 
+import 'deck_theme.dart';
 import 'slides/s01_title.dart';
 import 'slides/s02_speakers.dart';
 import 'slides/s03_agenda.dart';
@@ -70,7 +71,8 @@ class WorkshopSlides extends StatelessWidget {
         ),
         transition: const FlutterDeckTransition.fade(),
       ),
-      darkTheme: FlutterDeckThemeData.dark(),
+      lightTheme: buildDeckTheme(),
+      darkTheme: buildDeckTheme(),
       themeMode: ThemeMode.dark,
       slides: const [
         TitleSlide(),
