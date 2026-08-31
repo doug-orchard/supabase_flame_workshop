@@ -1,0 +1,21 @@
+name: slides
+description: "Slide deck for the Flame and Supabase multiplayer workshop."
+publish_to: none
+version: 0.1.0+1
+resolution: workspace
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_deck: ^0.29.0
+  flutter_deck_web_client: ^0.4.0
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

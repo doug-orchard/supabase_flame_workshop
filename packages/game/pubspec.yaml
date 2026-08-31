@@ -1,0 +1,79 @@
+name: game
+description: "Last-ship-standing multiplayer space arena built with Flame and Supabase."
+publish_to: none
+version: 0.1.0+1
+resolution: workspace
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flame: ^1.38.0
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.12.0
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+  supabase:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase
+  supabase_typegen:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase_typegen
+
+dependency_overrides:
+  supabase_flutter:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase_flutter
+  postgrest:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/postgrest
+  supabase:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase
+  supabase_auth:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase_auth
+  supabase_common:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase_common
+  supabase_functions:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase_functions
+  supabase_realtime:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase_realtime
+  supabase_storage:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/supabase_storage
+  yet_another_json_isolate:
+    git:
+      url: https://github.com/supabase/supabase-flutter.git
+      ref: feat/supabase-gen
+      path: packages/yet_another_json_isolate
+
+flutter:
+  uses-material-design: true

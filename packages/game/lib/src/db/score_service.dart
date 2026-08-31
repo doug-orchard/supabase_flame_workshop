@@ -1,0 +1,39 @@
+// The typed table access API is still experimental.
+// ignore_for_file: experimental_member_use
+
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'supabase_schema.g.dart';
+
+class ScoreService {
+  ScoreService(this._client);
+
+  final SupabaseClient _client;
+
+  Stream<List<ScoresRow>> topScores({int limit = 10}) {
+    return _client
+        .table(Scores.table)
+        .stream(primaryKey: [Scores.id])
+        .order(Scores.wins)
+        .limit(limit);
+  }
+
+  Future<void> recordWin({required String name}) async {
+    final id = _client.auth.currentUser!.id;
+    final existing = await _client
+        .table(Scores.table)
+        .select()
+        .where(Scores.id.eq(id))
+        .maybeSingle();
+    await _client
+        .table(Scores.table)
+        .upsert(
+          ScoresInsert(
+            id: id,
+            name: name,
+            wins: (existing?.wins ?? 0) + 1,
+            updatedAt: DateTime.now(),
+          ),
+        );
+  }
+}

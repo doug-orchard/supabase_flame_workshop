@@ -1,0 +1,43 @@
+class ShipStatePayload {
+  const ShipStatePayload({
+    required this.id,
+    required this.x,
+    required this.y,
+    required this.vx,
+    required this.vy,
+    required this.rotation,
+    required this.hp,
+  });
+
+  factory ShipStatePayload.fromJson(Map<String, dynamic> json) {
+    return ShipStatePayload(
+      id: json['id'] as String,
+      x: (json['x'] as num).toDouble(),
+      y: (json['y'] as num).toDouble(),
+      vx: (json['vx'] as num).toDouble(),
+      vy: (json['vy'] as num).toDouble(),
+      rotation: (json['rot'] as num).toDouble(),
+      hp: (json['hp'] as num).toDouble(),
+    );
+  }
+
+  final String id;
+  final double x;
+  final double y;
+  final double vx;
+  final double vy;
+  final double rotation;
+  final double hp;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'x': x,
+      'y': y,
+      'vx': vx,
+      'vy': vy,
+      'rot': rotation,
+      'hp': hp,
+    };
+  }
+}
