@@ -65,9 +65,15 @@ class NetService {
     _subscriptions.add(channel.onPresenceJoin.listen((_) => _emitRoster()));
     _subscriptions.add(
       channel.onPresenceLeave.listen((leave) {
+        final remainingIds = <String>{
+          for (final state in channel.presenceState())
+            for (final presence in state.presences)
+              if (presence.payload['id'] is String)
+                presence.payload['id'] as String,
+        };
         for (final presence in leave.leftPresences) {
           final id = presence.payload['id'] as String?;
-          if (id != null && id != myId) {
+          if (id != null && id != myId && !remainingIds.contains(id)) {
             onPeerLeft?.call(id);
           }
         }
@@ -145,7 +151,10 @@ class NetService {
     for (final state in channel.presenceState()) {
       for (final presence in state.presences) {
         final json = presence.payload;
-        if (json.containsKey('id')) {
+        if (json['id'] is String &&
+            json['name'] is String &&
+            json['color'] is int &&
+            json['phase'] is String) {
           final member = LobbyPresence.fromJson(json);
           byId[member.id] = member;
         }

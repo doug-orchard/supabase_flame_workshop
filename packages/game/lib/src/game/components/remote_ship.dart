@@ -14,11 +14,13 @@ class RemoteShip extends ShipBase {
     required Vector2 position,
     super.angle,
   }) : _target = position.clone(),
-       super(position: position);
+       super(position: position) {
+    _targetAngle = angle;
+  }
 
   final Vector2 _target;
   final velocity = Vector2.zero();
-  double _targetAngle = 0;
+  late double _targetAngle;
 
   void applyState(ShipStatePayload state) {
     _target.setValues(state.x, state.y);

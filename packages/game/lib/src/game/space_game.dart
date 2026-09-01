@@ -115,9 +115,14 @@ class SpaceGame extends FlameGame
     unawaited(pushPresence());
   }
 
+  static final _liveMatchPhases = {
+    GamePhase.countdown.name,
+    GamePhase.playing.name,
+  };
+
   LobbyPresence? get liveMatch {
     for (final member in roster.value) {
-      if (member.inMatch) {
+      if (member.inMatch && _liveMatchPhases.contains(member.phase)) {
         return member;
       }
     }
@@ -152,23 +157,41 @@ class SpaceGame extends FlameGame
     if (live == null) {
       return;
     }
-    final playingPhases = {GamePhase.countdown.name, GamePhase.playing.name};
+    final participants = [
+      for (final member in roster.value)
+        if (member.inMatch && _liveMatchPhases.contains(member.phase))
+          member.id,
+    ]..sort();
+    if (participants.isEmpty) {
+      return;
+    }
     final payload = RoundStartPayload(
       seed: live.seed!,
       startedAt: live.startedAt!,
-      participants: [
-        for (final member in roster.value)
-          if (member.inMatch && playingPhases.contains(member.phase)) member.id,
-      ]..sort(),
+      participants: participants,
     );
     _applyRoundStart(payload);
   }
 
   void _onRoundStart(RoundStartPayload payload) {
-    if (phase.value != GamePhase.lobby) {
+    if (phase.value == GamePhase.lobby) {
+      _applyRoundStart(payload);
       return;
     }
-    _applyRoundStart(payload);
+    final activeRound = round;
+    final beforeStart =
+        phase.value == GamePhase.countdown ||
+        phase.value == GamePhase.spectating;
+    if (beforeStart && activeRound != null && _outranks(payload, activeRound)) {
+      _applyRoundStart(payload);
+    }
+  }
+
+  bool _outranks(RoundStartPayload payload, RoundState current) {
+    if (payload.startedAt != current.startedAt) {
+      return payload.startedAt < current.startedAt;
+    }
+    return payload.seed < current.seed;
   }
 
   void _applyRoundStart(RoundStartPayload payload) {
@@ -267,6 +290,10 @@ class SpaceGame extends FlameGame
   }
 
   void _onShoot(ShootPayload payload) {
+    final activeRound = round;
+    if (activeRound == null || !activeRound.alive.contains(payload.id)) {
+      return;
+    }
     final owner = remoteShips[payload.id];
     _spawnBullet(
       bulletId: payload.bulletId,
@@ -431,7 +458,7 @@ class SpaceGame extends FlameGame
     Future<void>.delayed(
       const Duration(seconds: GameConfig.roundOverSeconds),
       () {
-        if (phase.value == GamePhase.roundOver) {
+        if (round == activeRound && phase.value == GamePhase.roundOver) {
           backToLobby();
         }
       },

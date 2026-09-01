@@ -170,9 +170,10 @@ class PlayerShip extends ShipBase
     super.onCollisionStart(intersectionPoints, other);
     if (other is Bullet && other.ownerId != playerId) {
       game.removeBullet(other.bulletId);
-      hp -= GameConfig.bulletDamage;
-      flash();
-      game.hpNotifier.value = hp;
+      if (hp <= 0) {
+        return;
+      }
+      applyDamage(GameConfig.bulletDamage, killerId: other.ownerId);
       game.net.send(
         NetEvent.hit,
         HitPayload(
@@ -182,9 +183,6 @@ class PlayerShip extends ShipBase
           hp: hp,
         ).toJson(),
       );
-      if (hp <= 0) {
-        game.onLocalDeath(other.ownerId);
-      }
     } else if (other is Asteroid) {
       final normal = (position - other.position)..normalize();
       velocity.reflect(normal);
