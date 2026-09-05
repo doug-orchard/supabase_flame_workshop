@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 import '../widgets/code_pane.dart';
-import '../widgets/side_bullets.dart';
+import '../widgets/repo_qr_card.dart';
 
 class SetupSlide extends FlutterDeckSlideWidget {
   const SetupSlide()
@@ -15,8 +15,8 @@ class SetupSlide extends FlutterDeckSlideWidget {
               'a region close to the room\n'
               '- Enable anonymous sign-ins under Authentication settings, '
               'the game signs everyone in anonymously\n'
-              '- Fork the workshop repository, we connect your fork to '
-              'Supabase on the next slide\n'
+              '- Point at the QR code, that is the repository to fork, we '
+              'connect your fork to Supabase on the next slide\n'
               '- The repository carries the migration and all the reference '
               'code, so nothing is copied by hand',
         ),
@@ -25,13 +25,27 @@ class SetupSlide extends FlutterDeckSlideWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterDeckSlide.split(
-      leftBuilder: (context) => const SideBullets(
-        items: [
-          'Create a free project at database.new',
-          'Enable anonymous sign-ins under Authentication',
-          'Fork the workshop repository on GitHub',
-          'Clone your fork and fetch the dependencies',
-        ],
+      leftBuilder: (context) => Padding(
+        padding: const EdgeInsets.fromLTRB(32, 32, 32, 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FlutterDeckBulletList(
+              items: [
+                'Create a free project at database.new',
+                'Enable anonymous sign-ins under Authentication',
+                'Fork the workshop repository on GitHub',
+                'Clone your fork and fetch the dependencies',
+              ],
+            ),
+            const SizedBox(height: 40),
+            const RepoQrCard(
+              label: 'Fork it from here',
+              url: 'https://github.com/spydon/supabase_flame_workshop',
+            ),
+          ],
+        ),
       ),
       rightBuilder: (context) => const CodePane(
         fileName: 'setup.sh',
