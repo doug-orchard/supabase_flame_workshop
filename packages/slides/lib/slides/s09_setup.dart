@@ -11,11 +11,14 @@ class SetupSlide extends FlutterDeckSlideWidget {
           route: '/setup',
           title: 'Setting up',
           speakerNotes:
-              '- Walk through creating a free project at database.new\n'
-              '- Enable anonymous sign-ins under Authentication settings\n'
-              '- The workshop repository carries the migration and all the '
-              'reference code\n'
-              '- The publishable key is on the project API settings page',
+              '- Walk through creating a free project at database.new, pick '
+              'a region close to the room\n'
+              '- Enable anonymous sign-ins under Authentication settings, '
+              'the game signs everyone in anonymously\n'
+              '- Fork the workshop repository, we connect your fork to '
+              'Supabase on the next slide\n'
+              '- The repository carries the migration and all the reference '
+              'code, so nothing is copied by hand',
         ),
       );
 
@@ -26,27 +29,22 @@ class SetupSlide extends FlutterDeckSlideWidget {
         items: [
           'Create a free project at database.new',
           'Enable anonymous sign-ins under Authentication',
-          'Clone the workshop repository',
-          'Push the scores migration to your project',
-          'Point the skeleton at your project with dart-defines',
+          'Fork the workshop repository on GitHub',
+          'Clone your fork and fetch the dependencies',
         ],
       ),
       rightBuilder: (context) => const CodePane(
         fileName: 'setup.sh',
         code: '''
 git clone \\
-    https://github.com/spydon/supabase_flame_workshop
+    https://github.com/your-name/supabase_flame_workshop
 cd supabase_flame_workshop
 dart pub get
 
-supabase link --project-ref your-ref
-supabase db push
-
-cd packages/skeleton
-flutter pub get
-flutter run -d chrome \\
-  --dart-define=SUPABASE_URL=... \\
-  --dart-define=SUPABASE_KEY=sb_publishable_...''',
+# What the repository already holds:
+#   supabase/migrations/  the scores table
+#   packages/skeleton/    where you build
+#   packages/game/        the finished reference''',
       ),
     );
   }

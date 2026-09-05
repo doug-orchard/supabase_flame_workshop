@@ -11,7 +11,8 @@ class DeploySlide extends FlutterDeckSlideWidget {
           route: '/deploy',
           title: 'Shipping it',
           speakerNotes:
-              '- Create a hosted Supabase project, push the migration\n'
+              '- The schema is already live if the project is connected '
+              'to GitHub, otherwise link and push it once\n'
               '- Enable anonymous sign-ins in the dashboard\n'
               '- flutter build web, host the output anywhere static\n'
               '- Mind the Realtime message limits on the free tier',
@@ -23,7 +24,7 @@ class DeploySlide extends FlutterDeckSlideWidget {
     return FlutterDeckSlide.split(
       leftBuilder: (context) => const SideBullets(
         items: [
-          'supabase link and db push for the schema',
+          'GitHub connected? The schema is already there',
           'Enable anonymous sign-ins for the project',
           'Any static host serves the web build',
           'Split rooms to respect Realtime rate limits',
@@ -32,6 +33,7 @@ class DeploySlide extends FlutterDeckSlideWidget {
       rightBuilder: (context) => const CodePane(
         fileName: 'deploy.sh',
         code: '''
+# Only without the GitHub integration:
 PROJECT=your-project-ref
 supabase link --project-ref \$PROJECT
 supabase db push
