@@ -30,7 +30,7 @@ class AgendaSlide extends FlutterDeckSlideWidget {
           'Sync ships at 20 Hz with Supabase Broadcast',
           'Lobbies and disconnects with Presence',
           'Rounds, combat, and a shrinking storm zone',
-          'A typed leaderboard, then deploy and play',
+          'A typed leaderboard, then play a full round',
         ],
       ),
     );

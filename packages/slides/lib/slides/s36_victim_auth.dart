@@ -38,7 +38,7 @@ void onCollisionStart(
   PositionComponent other,
 ) {
   if (other is Bullet && other.ownerId != playerId) {
-    game.removeBullet(other.bulletId);
+    other.removeFromParent();
     hp -= GameConfig.bulletDamage;
     game.net.send(
       NetEvent.hit,

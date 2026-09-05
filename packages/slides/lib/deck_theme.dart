@@ -48,3 +48,5 @@ FlutterDeckThemeData buildDeckTheme() {
     ),
   );
 }
+
+const deckAccent = Color(0xFF3ECF8E);

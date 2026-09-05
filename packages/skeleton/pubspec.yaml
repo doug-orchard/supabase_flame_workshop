@@ -1,5 +1,5 @@
-name: game
-description: "Last-ship-standing multiplayer space arena built with Flame and Supabase."
+name: skeleton
+description: "Starting point for the Flame and Supabase workshop exercises."
 publish_to: none
 version: 0.1.0+1
 resolution: workspace

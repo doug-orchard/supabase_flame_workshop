@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+import '../deck_theme.dart';
+
 class ExercisePanel extends StatelessWidget {
   const ExercisePanel({
     required this.number,
@@ -10,7 +12,7 @@ class ExercisePanel extends StatelessWidget {
     super.key,
   });
 
-  static const green = Color(0xFF3ECF8E);
+  static const green = deckAccent;
 
   final int number;
   final String title;

@@ -11,6 +11,7 @@ class ExerciseLiftoffSlide extends FlutterDeckSlideWidget {
           title: 'Exercise 1: Lift off',
           speakerNotes:
               '- Budget about 15 minutes\n'
+              '- Everybody works inside packages/skeleton\n'
               '- Walk around and unblock people\n'
               '- Common snag: anonymous sign-ins not enabled',
         ),
@@ -24,12 +25,11 @@ class ExerciseLiftoffSlide extends FlutterDeckSlideWidget {
         title: 'Lift off',
         tasks: [
           'Create your free Supabase project and enable anonymous sign-ins',
-          'Create a Flutter app and add flame plus supabase_flutter, with '
-              'the v3 git overrides from the workshop repository README',
           'Apply the scores migration to your project',
+          'Run packages/skeleton against it with your dart-defines',
           'main.dart: Supabase.initialize, then signInAnonymously',
         ],
-        doneWhen: 'Your app runs and holds a signed-in anonymous user.',
+        doneWhen: 'The launch pad screen turns green with your user id.',
       ),
     );
   }

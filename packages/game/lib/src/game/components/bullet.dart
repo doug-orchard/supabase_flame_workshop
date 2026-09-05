@@ -34,7 +34,7 @@ class Bullet extends PositionComponent
     position.add(velocity * dt);
     _ttl -= dt;
     if (_ttl <= 0) {
-      game.removeBullet(bulletId);
+      removeFromParent();
     }
   }
 
@@ -52,7 +52,13 @@ class Bullet extends PositionComponent
   ) {
     super.onCollisionStart(intersectionPoints, other);
     if (other is Asteroid) {
-      game.removeBullet(bulletId);
+      removeFromParent();
     }
+  }
+
+  @override
+  void onRemove() {
+    game.bullets.remove(bulletId);
+    super.onRemove();
   }
 }

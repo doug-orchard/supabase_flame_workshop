@@ -11,6 +11,8 @@ class StretchSlide extends FlutterDeckSlideWidget {
           title: 'Where to take it next',
           speakerNotes:
               '- Ideas for after the workshop\n'
+              '- The repository README carries the exact build and deploy '
+              'commands\n'
               '- The farm-proof leaderboard mirrors what production games '
               'need: move trust into Postgres functions',
         ),
@@ -21,6 +23,7 @@ class StretchSlide extends FlutterDeckSlideWidget {
     return FlutterDeckSlide.blank(
       builder: (context) => const SideBullets(
         items: [
+          'Ship the web build to any static host',
           'Mouse aim and touch controls',
           'Sound effects and a shader starfield',
           'Powerups from the shared seed',

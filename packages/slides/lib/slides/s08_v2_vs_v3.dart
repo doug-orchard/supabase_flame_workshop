@@ -10,7 +10,8 @@ class V2VersusV3Slide extends FlutterDeckSlideWidget {
           route: '/v2-vs-v3',
           title: 'v2 versus v3',
           speakerNotes:
-              '- Same query, twice: today with v2, then with the v3 draft\n'
+              '- Same query, twice: today with v2, then with the v3 '
+              'prerelease\n'
               '- v2: column names and filters are strings, rows are maps, '
               'every read is a hopeful cast\n'
               '- The winz typo compiles fine on v2 and fails at runtime\n'
@@ -40,7 +41,7 @@ await supabase.from('scores').upsert({
 });''',
       ),
       rightBuilder: (context) => const LabeledCode(
-        label: 'Next: v3, typed end to end',
+        label: 'Now: v3, typed end to end',
         code: '''
 final row = await supabase
     .table(Scores.table)

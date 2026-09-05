@@ -322,8 +322,8 @@ class SpaceGame extends FlameGame
     world.add(bullet);
   }
 
-  void removeBullet(String bulletId) {
-    bullets.remove(bulletId)?.removeFromParent();
+  void _removeBullet(String bulletId) {
+    bullets[bulletId]?.removeFromParent();
   }
 
   void _onShipState(ShipStatePayload payload) {
@@ -350,7 +350,7 @@ class SpaceGame extends FlameGame
   }
 
   void _onHit(HitPayload payload) {
-    removeBullet(payload.bulletId);
+    _removeBullet(payload.bulletId);
     final ship = remoteShips[payload.id];
     if (ship != null) {
       ship
