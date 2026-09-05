@@ -19,3 +19,4 @@ create policy "Players can update their own score"
   on public.scores for update
   using (auth.uid() = id)
   with check (auth.uid() = id);
+  
