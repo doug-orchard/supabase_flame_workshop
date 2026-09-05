@@ -169,7 +169,7 @@ class PlayerShip extends ShipBase
   ) {
     super.onCollisionStart(intersectionPoints, other);
     if (other is Bullet && other.ownerId != playerId) {
-      game.removeBullet(other.bulletId);
+      other.removeFromParent();
       if (hp <= 0) {
         return;
       }

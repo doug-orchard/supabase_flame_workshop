@@ -35,7 +35,7 @@ void update(double dt) {
   position.add(velocity * dt);
   _ttl -= dt;
   if (_ttl <= 0) {
-    game.removeBullet(bulletId);
+    removeFromParent();
   }
 }
 
