@@ -12,13 +12,13 @@ class TypedV3Slide extends FlutterDeckSlideWidget {
           steps: 4,
           speakerNotes:
               '- Say this up front: everything we build today runs on the '
-              'v3 draft branches\n'
+              'v3 prerelease\n'
               '- Supabase v3 for Dart is being built typesafe from the '
               'ground up\n'
-              '- Two open draft pull requests on supabase-flutter lay the '
-              'groundwork: #1634 typed table access, #1635 supabase_typegen\n'
-              '- The dependency_overrides in the workshop repository wire '
-              'them in\n'
+              '- Both pull requests landed: #1634 typed table access, '
+              '#1635 supabase_typegen\n'
+              '- Fresh off the press, so you get to use it before the '
+              'stable release\n'
               '- Typed Broadcast and Presence are the next step',
         ),
       );
@@ -30,9 +30,10 @@ class TypedV3Slide extends FlutterDeckSlideWidget {
         useSteps: true,
         items: [
           'Supabase v3 for Dart is typesafe from the ground up',
-          'PR #1634: PostgrestTable, TableColumn, typed queries and streams',
-          'PR #1635: supabase_typegen generates types from your schema',
-          'Everything we build today runs on those draft branches',
+          '#1634 merged: PostgrestTable, TableColumn, typed queries and '
+              'streams',
+          '#1635 merged: supabase_typegen generates types from your schema',
+          'Both on pub.dev today, in the 3.0.0-dev.2 prerelease',
         ],
       ),
     );

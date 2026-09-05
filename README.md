@@ -6,20 +6,25 @@ space arena. The game runs entirely on Flutter and serverless primitives: the
 [Supabase Realtime](https://supabase.com/docs/guides/realtime) powers the
 netcode with Broadcast events and Presence. There is no game server.
 
-The database layer runs on the typesafe Supabase v3 groundwork from two open
-draft pull requests to
-[supabase-flutter](https://github.com/supabase/supabase-flutter):
+The database layer runs on the typesafe Supabase v3 groundwork, merged into
+[supabase-flutter](https://github.com/supabase/supabase-flutter) and published
+to pub.dev:
 
 - [#1634](https://github.com/supabase/supabase-flutter/pull/1634) typed table
-  access with `PostgrestTable` and `TableColumn`
+  access with `PostgrestTable` and `TableColumn`, in `supabase_flutter`
+  3.0.0-dev.2
 - [#1635](https://github.com/supabase/supabase-flutter/pull/1635) the
-  `supabase_typegen` code generator
+  `supabase_typegen` code generator, released as `supabase_typegen` 0.1.2
+
+Everything resolves from pub.dev. There are no git dependencies and no
+`dependency_overrides` anywhere in the workspace.
 
 ## Packages
 
 | Package | Description |
 | --- | --- |
-| `packages/game` | The multiplayer game (Flutter web and macOS) |
+| `packages/skeleton` | The starting point for the exercises: dependencies wired up, no game |
+| `packages/game` | The finished multiplayer game (Flutter web and macOS) |
 | `packages/slides` | The workshop slide deck, built with [flutter_deck](https://pub.dev/packages/flutter_deck) |
 
 ## Prerequisites
@@ -38,6 +43,18 @@ supabase start
 `supabase start` boots the local stack (API on port 54621) and applies the
 `scores` table migration. The game defaults to the local URL and the standard
 local publishable key, so no configuration is needed for local play.
+
+## Start the exercises
+
+`packages/skeleton` is where attendees write their code. It carries the
+dependencies, the dart-define configuration, the tuning constants, and the web
+scaffolding, and nothing else. The game itself is what the exercises build:
+
+```sh
+melos run skeleton
+```
+
+See `packages/skeleton/README.md` for the details.
 
 ## Run the game
 
@@ -89,9 +106,9 @@ match and regenerate:
 ```sh
 cd packages/game
 dart run supabase_typegen \
-  --input ../../supabase/schema.json \
   --output lib/src/db/supabase_schema.g.dart \
-  --import package:supabase_flutter/supabase_flutter.dart
+  --import package:supabase_flutter/supabase_flutter.dart \
+  < ../../supabase/schema.json
 ```
 
 Once `supabase gen types --lang json` ships in the CLI, the snapshot can be

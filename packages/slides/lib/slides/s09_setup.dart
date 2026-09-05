@@ -28,7 +28,7 @@ class SetupSlide extends FlutterDeckSlideWidget {
           'Enable anonymous sign-ins under Authentication',
           'Clone the workshop repository',
           'Push the scores migration to your project',
-          'Point the game at your project with dart-defines',
+          'Point the skeleton at your project with dart-defines',
         ],
       ),
       rightBuilder: (context) => const CodePane(
@@ -42,7 +42,8 @@ dart pub get
 supabase link --project-ref your-ref
 supabase db push
 
-cd packages/game
+cd packages/skeleton
+flutter pub get
 flutter run -d chrome \\
   --dart-define=SUPABASE_URL=... \\
   --dart-define=SUPABASE_KEY=sb_publishable_...''',
