@@ -35,8 +35,7 @@ class TypedV3Slide extends FlutterDeckSlideWidget {
           'Tables and columns become Dart types, so the compiler checks '
               'your queries and streams',
           'A generator reads your database schema and writes those types',
-          'On pub.dev today as the 3.0.0-dev.2 prerelease, already resolved '
-              'for you',
+          'On pub.dev today as the 3.0.0-dev.2 prerelease',
         ],
       ),
     );
