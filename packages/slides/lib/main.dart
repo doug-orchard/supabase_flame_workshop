@@ -49,9 +49,8 @@ import 'slides/s43_typed_tables.dart';
 import 'slides/s44_typed_stream.dart';
 import 'slides/s45_exercise_leaderboard.dart';
 import 'slides/s46_demo.dart';
-import 'slides/s47_deploy.dart';
-import 'slides/s48_stretch.dart';
-import 'slides/s49_thanks.dart';
+import 'slides/s47_stretch.dart';
+import 'slides/s48_thanks.dart';
 
 void main() => runApp(const WorkshopSlides());
 
@@ -124,7 +123,6 @@ class WorkshopSlides extends StatelessWidget {
         TypedStreamSlide(),
         ExerciseLeaderboardSlide(),
         DemoSlide(),
-        DeploySlide(),
         StretchSlide(),
         ThanksSlide(),
       ],
