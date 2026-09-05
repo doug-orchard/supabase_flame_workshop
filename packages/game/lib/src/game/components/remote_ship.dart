@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 
 import '../../game_config.dart';
 import '../../net/payloads/ship_state_payload.dart';
@@ -40,10 +40,6 @@ class RemoteShip extends ShipBase {
     position.add(velocity * dt);
     final factor = min(1.0, dt * GameConfig.remoteLerpFactorPerSecond);
     position.add((_target - position) * factor);
-    final angleError = atan2(
-      sin(_targetAngle - angle),
-      cos(_targetAngle - angle),
-    );
-    angle += angleError * factor;
+    angle += (_targetAngle - angle).toNormalizedAngle() * factor;
   }
 }
